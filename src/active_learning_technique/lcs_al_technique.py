@@ -1,5 +1,5 @@
 import numpy
-import src.support as support
+import src.support.support as support
 
 from src.active_learning_technique.abstract_al_technique import AbstractALTechnique
 

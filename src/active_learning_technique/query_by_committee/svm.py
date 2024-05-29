@@ -2,7 +2,7 @@ import numpy
 
 from sklearn import svm
 from sklearn.metrics import accuracy_score
-from src.support import clprint, Reason
+from src.support.support import clprint, Reason
 
 
 class SVM:

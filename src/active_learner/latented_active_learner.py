@@ -1,10 +1,10 @@
 import numpy
 import torch
-import src.support as support
+import src.support.support as support
 
 from sklearn.neighbors import NearestNeighbors
 from src.active_learner.simple_active_learner import SimpleActiveLearner
-from src.support import clprint, Reason
+from src.support.support import clprint, Reason
 
 
 class LatentedActiveLearner(SimpleActiveLearner):

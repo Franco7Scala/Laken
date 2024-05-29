@@ -1,6 +1,6 @@
 from sklearn.metrics import accuracy_score
 from sklearn.ensemble import RandomForestClassifier
-from src.support import clprint, Reason
+from src.support.support import clprint, Reason
 
 
 class RandomForestClassifier:

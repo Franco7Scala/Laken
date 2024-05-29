@@ -1,7 +1,7 @@
 import numpy
 import torch
 import random
-import src.support as support
+import src.support.support as support
 
 from src.al_dataset.dataset import Dataset
 from torch.utils.data import DataLoader

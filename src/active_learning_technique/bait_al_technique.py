@@ -1,7 +1,7 @@
 import numpy
 import torch
 import torch.nn.functional as functional
-import src.support as support
+import src.support.support as support
 
 from torch.utils.data import DataLoader
 from src.active_learning_technique.abstract_al_technique import AbstractALTechnique

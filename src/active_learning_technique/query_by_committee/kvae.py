@@ -1,6 +1,6 @@
 import numpy
 import torch
-import src.support as support
+import src.support.support as support
 
 from sklearn.neighbors import NearestNeighbors
 

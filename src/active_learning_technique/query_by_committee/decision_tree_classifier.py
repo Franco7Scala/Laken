@@ -1,6 +1,6 @@
 from sklearn import tree
 from sklearn.metrics import accuracy_score
-from src.support import clprint, Reason
+from src.support.support import clprint, Reason
 
 
 class DecisionTreeClassifier:

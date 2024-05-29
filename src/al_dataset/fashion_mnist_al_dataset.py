@@ -1,4 +1,4 @@
-import src.support as support
+import src.support.support as support
 
 from src.al_dataset.abstract_al_dataset import AbstractALDataset
 from torchvision import datasets, transforms

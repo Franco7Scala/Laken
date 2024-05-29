@@ -1,4 +1,4 @@
-from src.support import clprint, Reason, get_time_in_millis
+from src.support.support import clprint, Reason, get_time_in_millis
 
 
 class SimpleActiveLearner:

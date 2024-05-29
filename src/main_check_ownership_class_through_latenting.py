@@ -1,13 +1,16 @@
+import sys
 import numpy
 import torch
+import src.support.support as support
 
 from sklearn.neighbors import NearestNeighbors
 from torch import optim
-import support
+from src.al_dataset.fashion_mnist_al_dataset import FashionMNISTALDataset
+from src.neural_networks.fashion_mnist import fashion_mnist_vae
 from src.neural_networks.mnist import mnist_vae
 from src.al_dataset.mnist_al_dataset import MNISTALDataset
 from src.neural_networks.mnist.mnist_nn import MNIST_nn
-from src.support import clprint, Reason, get_time_in_millis
+from src.support.support import clprint, Reason, get_time_in_millis
 
 
 if __name__ == "__main__":
@@ -16,9 +19,22 @@ if __name__ == "__main__":
 
     percentage_labeled = 0.001
     model_training_epochs = 10
+    dataset_name = "mnist"  # "fmnist"
 
-    vae = mnist_vae.load_model(support.vae_dim_code, support.model_path, support.device)
-    dataset = MNISTALDataset(percentage_labeled)
+    #############################################################################################################
+    if dataset_name == "mnist":
+        vae = mnist_vae.load_model(support.vae_dim_code, support.model_path, support.device)
+        dataset = MNISTALDataset(percentage_labeled)
+
+    elif dataset_name == "fmnist":
+        vae = fashion_mnist_vae.load_model(support.vae_dim_code, support.model_path, support.device)
+        dataset = FashionMNISTALDataset(percentage_labeled)
+
+    else:
+        clprint("Unknown dataset...", Reason.WARNING)
+        sys.exit(0)
+
+
     clprint("Considering {}% ({} samples) of entire dataset to execute the test...".format(percentage_labeled * 100, len(dataset)), Reason.INFO_TRAINING, loggable=True)
 
     # Training knn on the real samples
