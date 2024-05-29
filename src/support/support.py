@@ -1,13 +1,25 @@
 import os
 import torch
+import numpy
 import time
 import warnings
+import random
 
 from enum import Enum
 
 
 warnings.filterwarnings("ignore")
 
+
+# reproducibility
+seed = 0
+random.seed(seed)
+numpy.random.seed(seed)
+torch.manual_seed(seed)
+torch.cuda.manual_seed(seed)
+torch.cuda.manual_seed_all(seed)
+torch.use_deterministic_algorithms = True
+torch.backends.cudnn.benchmark = False
 
 # training parameters
 vae_batch_size = 128
