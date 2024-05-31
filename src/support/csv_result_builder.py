@@ -2,7 +2,7 @@ import os
 import csv
 
 
-root_dir = "~/Desktop/fashion_mnist_results"
+root_dir = "/Desktop/mnist_results"
 
 
 def build_csv(start_index, source_file, destination_file):
@@ -11,11 +11,23 @@ def build_csv(start_index, source_file, destination_file):
         with open(destination_file, "a") as destination_f:
             writer = csv.writer(destination_f, delimiter=";")
             epoque = 0
-            writer.writerow(["Epoque", "Loss", "Accuracy", "ElapsedTime"])
-            writer.writerow([epoque, str(lines[start_index][6:]).replace(".", ","), str(lines[start_index + 1][10:]).replace(".", ","), "None"])
-            for i in range(start_index + 3, len(lines) - 2, 4):
+            writer.writerow(["Epoque", "Loss", "Accuracy", "Precision", "Recall", "F1", "ElapsedTime"])
+            writer.writerow([epoque,
+                             str(lines[start_index][6:]).replace(".", ","),
+                             str(lines[start_index + 1][10:]).replace(".", ","),
+                             str(lines[start_index + 2][11:]).replace(".", ","),
+                             str(lines[start_index + 3][8:]).replace(".", ","),
+                             str(lines[start_index + 4][4:]).replace(".", ","),
+                             "None"])
+            for i in range(start_index + 6, len(lines) - 2, 7):
                 epoque += 1
-                writer.writerow([epoque, str(lines[i + 1][6:]).replace(".", ","), str(lines[i + 2][10:]).replace(".", ","), lines[i][14:]])
+                writer.writerow([epoque,
+                                 str(lines[i + 1][6:]).replace(".", ","),
+                                 str(lines[i + 2][10:]).replace(".", ","),
+                                 str(lines[i + 3][11:]).replace(".", ","),
+                                 str(lines[i + 4][8:]).replace(".", ","),
+                                 str(lines[i + 5][4:]).replace(".", ","),
+                                 lines[i][14:]])
 
 
 if __name__ == "__main__":

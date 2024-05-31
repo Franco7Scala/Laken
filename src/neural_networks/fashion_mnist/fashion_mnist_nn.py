@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from sklearn.metrics import precision_score, recall_score, f1_score
+
 
 class Fashion_MNIST_nn(nn.Module):
 
@@ -47,15 +49,23 @@ class Fashion_MNIST_nn(nn.Module):
         self.eval()
         test_loss = 0
         correct = 0
+        all_preds = []
+        all_targets = []
         with torch.no_grad():
             for data, target in test_loader:
                 output = self(data.to(self.device))
                 test_loss += F.nll_loss(output.to(self.device), target.to(self.device), size_average=False).item()
                 pred = output.to("cpu").data.max(1, keepdim=True)[1]
                 correct += pred.eq(target.to("cpu").data.view_as(pred)).sum()
+                all_preds.extend([i.item() for i in pred])
+                all_targets.extend(target.cpu().numpy())
 
         test_loss /= len(test_loader.dataset)
-        return test_loss, (correct / len(test_loader.dataset) * 100)
+        accuracy = (correct / len(test_loader.dataset) * 100).item()
+        precision = precision_score(all_targets, all_preds, average='weighted', zero_division=1)
+        recall = recall_score(all_targets, all_preds, average='weighted', zero_division=1)
+        f1 = f1_score(all_targets, all_preds, average='weighted', zero_division=1)
+        return test_loss, accuracy, precision, recall, f1
 
     def fit(self, epochs, criterion, optimizer, train_loader):
         for epoch in range(epochs):
@@ -90,6 +100,6 @@ class Fashion_MNIST_nn(nn.Module):
 
 
 def load_model(path, device):
-    model = MNIST_nn(device)
+    model = Fashion_MNIST_nn(device)
     model.load_state_dict(torch.load(path, map_location=device))
     return model

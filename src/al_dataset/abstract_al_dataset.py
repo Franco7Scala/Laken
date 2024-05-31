@@ -35,6 +35,8 @@ class AbstractALDataset:
             else:
                 self.unlabeled_dict[x_dataset[i]] = y_dataset[i]
 
+        self.oracle_x_labeled = self.x_labeled.copy()
+        self.oracle_y_labeled = self.y_labeled.copy()
         size = 1
         for dim in self.shape_data:
             size *= dim
@@ -57,8 +59,12 @@ class AbstractALDataset:
 
     def annotate(self, x_to_label):
         for key in x_to_label:
-            self.x_labeled.append(key)
-            self.y_labeled.append(self.unlabeled_dict.pop(key))
+            current_x = key
+            current_y = self.unlabeled_dict.pop(key)
+            self.x_labeled.append(current_x)
+            self.y_labeled.append(current_y)
+            self.oracle_x_labeled.append(current_x)
+            self.oracle_y_labeled.append(current_y)
 
     def supply_annotation(self, xs, ys):
         for i in range(len(xs)):
@@ -71,6 +77,9 @@ class AbstractALDataset:
 
     def get_train_loader(self):
         return DataLoader(Dataset(self.shape_data, self.x_labeled, self.y_labeled), batch_size=support.model_batch_size)
+
+    def get_oracle_train_loader(self):
+        return DataLoader(Dataset(self.shape_data, self.oracle_x_labeled, self.oracle_y_labeled), batch_size=support.model_batch_size)
 
     def get_test_loader(self):
         return self.test_loader

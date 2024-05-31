@@ -22,15 +22,15 @@ from src.al_dataset.mnist_al_dataset import MNISTALDataset
 if __name__ == "__main__":
     support.warm_up()
 
-    percentage_labeled = 0.01
+    percentage_labeled = 0.2
     al_epochs = 10
     training_epochs = 10
     n_samples_to_select = 500
     n_samples_for_human = 50
-    criterion = None
     n_classes = 10
-    al_technique = "rnd"    # "lcs" "bait" "qbc"
+    al_technique = "rnd"    # "rnd" "lcs" "bait" "qbc"
     use_latented_al = True
+    n_neighbors_for_knn = 5
     dataset_name = "mnist"  # "fmnist"
 
     #############################################################################################################
@@ -39,11 +39,13 @@ if __name__ == "__main__":
         vae = mnist_vae.load_model(support.vae_dim_code, support.model_path, support.device)
         model = MNIST_nn(support.device)
         optimizer = optim.SGD(model.parameters(), lr=support.model_learning_rate, momentum=support.model_momentum)
+        criterion = None
 
     elif dataset_name == "fmnist":
         vae = fashion_mnist_vae.load_model(support.vae_dim_code, support.model_path, support.device)
         model = Fashion_MNIST_nn(support.device)
         optimizer = optim.SGD(model.parameters(), lr=support.model_learning_rate, momentum=support.model_momentum)
+        criterion = None
 
     else:
         clprint("Unknown dataset...", Reason.WARNING)
@@ -84,7 +86,7 @@ if __name__ == "__main__":
 
     clprint("Starting AL process...", Reason.INFO_TRAINING)
     if use_latented_al:
-        active_learner = LatentedActiveLearner(vae, al_dataset, al_technique, n_samples_for_human)
+        active_learner = LatentedActiveLearner(vae, al_dataset, al_technique, n_samples_for_human, n_neighbors_for_knn)
 
     else:
         active_learner = SimpleActiveLearner(al_dataset, al_technique)

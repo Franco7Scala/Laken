@@ -19,6 +19,7 @@ if __name__ == "__main__":
 
     percentage_labeled = 0.001
     model_training_epochs = 10
+    n_neighbors = 5
     dataset_name = "mnist"  # "fmnist"
 
     #############################################################################################################
@@ -46,9 +47,9 @@ if __name__ == "__main__":
         x.append(batch[0].cpu().squeeze().detach().numpy().reshape(1, -1))
         y.append(int(batch[1].squeeze().detach().numpy()))
 
-    clprint("Training knn...", Reason.INFO_TRAINING)
+    clprint("Training knn (n_neighbors={})...".format(n_neighbors), Reason.INFO_TRAINING)
     latented_start_time = get_time_in_millis()
-    knn = NearestNeighbors(n_neighbors=10)
+    knn = NearestNeighbors(n_neighbors=n_neighbors)
     knn.fit(numpy.squeeze(numpy.array(x)))
     latented_end_time = get_time_in_millis()
 
@@ -87,9 +88,9 @@ if __name__ == "__main__":
         x.append(vae.encode(batch[0].to(support.device)).cpu().squeeze().detach().numpy())
         y.append(int(batch[1].squeeze().detach().numpy()))
 
-    clprint("Training knn...", Reason.INFO_TRAINING)
+    clprint("Training knn (n_neighbors={})...".format(n_neighbors), Reason.INFO_TRAINING)
     latented_start_time = get_time_in_millis()
-    knn = NearestNeighbors(n_neighbors=10)
+    knn = NearestNeighbors(n_neighbors=n_neighbors)
     knn.fit(numpy.array(x))
     latented_end_time = get_time_in_millis()
 

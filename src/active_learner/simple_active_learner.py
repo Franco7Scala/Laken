@@ -25,8 +25,8 @@ class SimpleActiveLearner:
         clprint("Training model...", Reason.INFO_TRAINING)
         model.fit(training_epochs, criterion, optimizer, self.dataset.get_train_loader())
         clprint("Evaluating model...", Reason.INFO_TRAINING)
-        loss, accuracy = model.evaluate(criterion, self.dataset.get_test_loader())
-        clprint("Loss: {}\nAccuracy: {}".format(loss, accuracy), Reason.LIGHT_INFO_TRAINING, loggable=True)
+        loss, accuracy, precision, recall, f1 = model.evaluate(criterion, self.dataset.get_test_loader())
+        clprint("Loss: {}\nAccuracy: {}\nPrecision: {}\nRecall: {}\nF1: {}".format(loss, accuracy, precision, recall, f1), Reason.LIGHT_INFO_TRAINING, loggable=True)
 
     def _select_next_samples(self, n_samples_to_select):
         xs = self.al_technique.select_samples(self.dataset.get_unlabeled_data(), n_samples_to_select)

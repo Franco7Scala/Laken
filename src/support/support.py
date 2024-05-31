@@ -39,7 +39,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # paths
 model_name = "mnist_vae"
 dataset_path = "../dataset/{}/"
-results_path = "../../results"
+results_path = "../results"
 model_path = "{}/{}.nn".format(results_path, model_name)
 log_path = "{}/log_{}.txt"
 reconstruction_image_path = "{}/reconstruction_images_{}.pdf".format(results_path, model_name)

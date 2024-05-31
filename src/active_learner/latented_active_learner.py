@@ -9,12 +9,16 @@ from src.support.support import clprint, Reason
 
 class LatentedActiveLearner(SimpleActiveLearner):
 
-    def __init__(self, vae, dataset, al_technique, n_samples_to_keep):
+    def __init__(self, vae, dataset, al_technique, n_samples_to_keep, n_neighbors=10):
         super(LatentedActiveLearner, self).__init__(dataset, al_technique)
         self.n_samples_to_keep = n_samples_to_keep
         self.vae = vae.to(support.device)
-        clprint("Keeping all labeled data from dataset to train knn...", Reason.INFO_TRAINING)
-        data = dataset.get_train_loader()
+        self.n_neighbors = n_neighbors
+        self.train_knn()
+
+    def train_knn(self):
+        clprint("Keeping all labeled data from dataset to train knn (n_neighbors={})...".format(self.n_neighbors), Reason.INFO_TRAINING)
+        data = self.dataset.get_oracle_train_loader()
         dataiter = iter(data)
         self.x = numpy.zeros((len(data) * support.vae_batch_size, support.vae_dim_code))
         self.y = numpy.zeros(len(data) * support.vae_batch_size)
@@ -26,9 +30,8 @@ class LatentedActiveLearner(SimpleActiveLearner):
                 self.x[index] = latented_x[i]
                 self.y[index] = latented_y[i]
                 index += 1
-
         clprint("Training knn...", Reason.INFO_TRAINING)
-        self.knn = NearestNeighbors(n_neighbors=10)
+        self.knn = NearestNeighbors(n_neighbors=self.n_neighbors)
         self.knn.fit(self.x)
 
     def elaborate(self, model, al_epochs, training_epochs, n_samples_to_select, criterion, optimizer):
@@ -39,6 +42,8 @@ class LatentedActiveLearner(SimpleActiveLearner):
         xs = self.al_technique.select_samples(self.dataset.get_unlabeled_data(), n_samples_to_select)
         clprint("Annotating {} samples...".format(self.n_samples_to_keep), Reason.INFO_TRAINING)
         self.dataset.annotate(xs[:self.n_samples_to_keep])
+        clprint("Updating knn...".format(self.n_samples_to_keep), Reason.INFO_TRAINING)
+        self.train_knn()
         clprint("Auto annotating {} samples...".format(self.n_samples_to_select - self.n_samples_to_keep), Reason.INFO_TRAINING)
         self.dataset.supply_annotation(xs[self.n_samples_to_keep:], self.latented_annotation(xs[self.n_samples_to_keep:]))
 
@@ -50,6 +55,7 @@ class LatentedActiveLearner(SimpleActiveLearner):
             for neighbor_index in neighbors[0]:
                 if self.y[neighbor_index] in n_for_each_class.keys():
                     n_for_each_class[self.y[neighbor_index]] += 1
+
                 else:
                     n_for_each_class[self.y[neighbor_index]] = 1
 
