@@ -7,12 +7,13 @@ from src.active_learner.simple_active_learner import SimpleActiveLearner
 from src.support.support import clprint, Reason
 
 
-class LatentedActiveLearner(SimpleActiveLearner):
+class LakenActiveLearner(SimpleActiveLearner):
 
     def __init__(self, vae, dataset, al_technique, n_samples_to_keep, n_neighbors=10):
-        super(LatentedActiveLearner, self).__init__(dataset, al_technique)
+        super(LakenActiveLearner, self).__init__(dataset, al_technique)
         self.n_samples_to_keep = n_samples_to_keep
         self.vae = vae.to(support.device)
+        self.vae.eval()
         self.n_neighbors = n_neighbors
         self.train_knn()
 

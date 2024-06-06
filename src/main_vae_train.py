@@ -10,6 +10,7 @@ from src.support.support import dataset_path, Reason, clprint
 
 if __name__ == "__main__":
     support.warm_up()
+
     dataset_name = "mnist"  # "fmnist"
 
     #############################################################################################################

@@ -9,13 +9,13 @@ from src.al_dataset.fashion_mnist_al_dataset import FashionMNISTALDataset
 from src.neural_networks.fashion_mnist import fashion_mnist_vae
 from src.neural_networks.mnist import mnist_vae
 from src.al_dataset.mnist_al_dataset import MNISTALDataset
-from src.neural_networks.mnist.mnist_nn import MNIST_nn
+from src.neural_networks.cnn import Cnn
 from src.support.support import clprint, Reason, get_time_in_millis
 
 
 if __name__ == "__main__":
     support.warm_up()
-    support.model_batch_size = 1
+    support.train_batch_size = 1
 
     percentage_labeled = 0.001
     model_training_epochs = 10
@@ -34,7 +34,6 @@ if __name__ == "__main__":
     else:
         clprint("Unknown dataset...", Reason.WARNING)
         sys.exit(0)
-
 
     clprint("Considering {}% ({} samples) of entire dataset to execute the test...".format(percentage_labeled * 100, len(dataset)), Reason.INFO_TRAINING, loggable=True)
 
@@ -121,9 +120,9 @@ if __name__ == "__main__":
     clprint("The accuracy of the technique on the latent space is {}% reached in {} seconds!".format(((n_correct_samples/len(unlabeled_dict.keys())) * 100), ((latented_end_time - latented_start_time) / 1000)), Reason.OUTPUT_TRAINING, loggable=True)
 
     # Training a neural network on the real samples
-    model = MNIST_nn(support.device)
-    optimizer = optim.SGD(model.parameters(), lr=support.model_learning_rate, momentum=support.model_momentum)
-    support.model_batch_size = 32
+    model = Cnn(support.device)
+    optimizer = optim.SGD(model.parameters(), lr=support.cnn_learning_rate, momentum=support.cnn_momentum)
+    support.train_batch_size = 32
 
     clprint("Training neural network...", Reason.INFO_TRAINING)
     training_nn_start_time = get_time_in_millis()

@@ -12,7 +12,7 @@ class AbstractALDataset:
     def __init__(self, percentage_labeled, test_dataset, train_dataset, shape_data):
         self.percentage_labeled = percentage_labeled
         self.shape_data = shape_data
-        self.test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=support.model_batch_size, shuffle=False)
+        self.test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=support.train_batch_size, shuffle=False)
         self.x_labeled = []
         self.y_labeled = []
         self.unlabeled_dict = {}
@@ -73,13 +73,13 @@ class AbstractALDataset:
             self.unlabeled_dict.pop(xs[i])
 
     def get_all_data_loader(self):
-        return DataLoader(Dataset(self.shape_data, self.x_labeled.extend(self.unlabeled_dict.keys()), None), batch_size=support.model_batch_size)
+        return DataLoader(Dataset(self.shape_data, self.x_labeled.extend(self.unlabeled_dict.keys()), None), batch_size=support.train_batch_size)
 
     def get_train_loader(self):
-        return DataLoader(Dataset(self.shape_data, self.x_labeled, self.y_labeled), batch_size=support.model_batch_size)
+        return DataLoader(Dataset(self.shape_data, self.x_labeled, self.y_labeled), batch_size=support.train_batch_size)
 
     def get_oracle_train_loader(self):
-        return DataLoader(Dataset(self.shape_data, self.oracle_x_labeled, self.oracle_y_labeled), batch_size=support.model_batch_size)
+        return DataLoader(Dataset(self.shape_data, self.oracle_x_labeled, self.oracle_y_labeled), batch_size=support.train_batch_size)
 
     def get_test_loader(self):
         return self.test_loader

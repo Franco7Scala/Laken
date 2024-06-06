@@ -1,12 +1,13 @@
+import sklearn.ensemble
+
 from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
 from src.support.support import clprint, Reason
 
 
 class RandomForestClassifier:
 
     def __init__(self, dataset):
-        self.classifier = RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1, random_state=42)
+        self.classifier = sklearn.ensemble.RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1, random_state=42)
         self._train_model(dataset)
 
     def predict(self, x):

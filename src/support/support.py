@@ -27,10 +27,13 @@ vae_dim_code = 4
 vae_learning_rate = 1e-3
 vae_training_epochs = 100
 
-model_batch_size = 128
-model_learning_rate = 1e-3
-model_momentum = 0.5
+train_batch_size = 128
 input_shape = (28, 28)
+
+cnn_learning_rate = 1e-3
+cnn_momentum = 0.5
+
+resnet_learning_rate = 0.001
 
 # fixed setup code
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"

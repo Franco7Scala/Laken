@@ -1,4 +1,3 @@
-import numpy
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -6,10 +5,10 @@ import torch.nn.functional as F
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 
-class MNIST_nn(nn.Module):
+class Cnn(nn.Module):
 
     def __init__(self, device):
-        super(MNIST_nn, self).__init__()
+        super(Cnn, self).__init__()
         self.device = device
         self.conv1 = nn.Conv2d(1, 10, kernel_size=5)
         self.conv2 = nn.Conv2d(10, 20, kernel_size=5)
@@ -78,21 +77,6 @@ class MNIST_nn(nn.Module):
     def predict(self, x):
         return self.forward(torch.unsqueeze(torch.unsqueeze(x, dim=0), dim=0).to(self.device)).cpu().squeeze().detach().numpy()
 
-    def loss_gradient(self, x, y):
-        prediction = self(x)
-        error = prediction - y
-
-        # Calcola la derivata della funzione di perdita del modello rispetto alla predizione del modello.
-        loss_gradient_prediction = error * self.activation(prediction)
-
-        # Calcola la derivata della funzione di attivazione dell'ultimo layer rispetto alla predizione del modello.
-        activation_gradient = self.activation_gradient(prediction)
-
-        # Calcola la derivata della funzione di perdita del modello rispetto ai parametri del modello.
-        gradient = loss_gradient_prediction * activation_gradient
-
-        return gradient
-
     def get_embedding_dim(self):
         return 10
 
@@ -101,6 +85,6 @@ class MNIST_nn(nn.Module):
 
 
 def load_model(path, device):
-    model = MNIST_nn(device)
+    model = Cnn(device)
     model.load_state_dict(torch.load(path, map_location=device))
     return model
