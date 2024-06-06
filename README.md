@@ -2,6 +2,8 @@
 
 This repository contains code of Laken presented in the paper "Enhancing Active Learning through Latent Space Exploration: A K-Nearest Neighbors Approach"
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ## How It Works
 
 1. **VAE Training:**
