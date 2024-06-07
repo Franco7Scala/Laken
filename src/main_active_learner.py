@@ -11,7 +11,6 @@ from active_learning_technique.query_by_committee.decision_tree_classifier impor
 from active_learning_technique.query_by_committee.random_forest_classifier import RandomForestClassifier
 from src.al_dataset.fashion_mnist_al_dataset import FashionMNISTALDataset
 from src.neural_networks.fashion_mnist import fashion_mnist_vae
-from src.neural_networks.nn import Nn
 from src.neural_networks.resnet import ResNet
 from src.support.support import Reason, clprint
 from active_learning_technique.random_al_technique import RandomALTechnique
@@ -27,12 +26,12 @@ if __name__ == "__main__":
     percentage_labeled = 0.01
     al_epochs = 10
     training_epochs = 10
-    n_samples_to_select = 50
+    n_samples_to_select = 500
     n_samples_for_human = 50
     n_classes = 10
-    use_laken = False
+    use_laken = True
     n_neighbors_for_knn = 5
-    al_technique = "rnd"     # "rnd" "lcs" "bait" "qbc"
+    al_technique = "lcs"     # "rnd" "lcs" "bait" "qbc"
     model_name = "resnet"    # "cnn" "resnet"
     dataset_name = "mnist"   # "mnist" "fmnist"
 
