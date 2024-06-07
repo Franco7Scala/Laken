@@ -163,7 +163,7 @@ class Fashion_MNIST_VAE(nn.Module):
         figure.update_traces(marker=dict(size=10, line=dict(width=2,  color="DarkSlateGrey")), selector=dict(mode="markers"))
         figure.update_yaxes(visible=False, showticklabels=False)
         figure.update_xaxes(visible=False, showticklabels=False)
-        #figure.show()
+        figure.show()
         figure.write_image(path_image)
 
 

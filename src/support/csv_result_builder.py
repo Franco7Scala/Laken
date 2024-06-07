@@ -2,7 +2,7 @@ import os
 import csv
 
 
-root_dir = "/Users/francesco/Desktop/results"
+root_dir = "~/Desktop/results"
 
 
 def build_csv(start_index, source_file, destination_file, is_long, increment):

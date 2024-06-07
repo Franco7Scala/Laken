@@ -92,7 +92,9 @@ class ResNet(nn.Module):
         return probas
 
     def detailed_forward(self, x):
-        x = x.reshape((1, 1, 28, 28)).type(torch.float32)
+        if x.shape[0] == 1:
+            x = x.reshape((1, 1, 28, 28)).type(torch.float32)
+
         x = self.conv1(x)
         x = self.bn1(x)
         x = self.relu(x)
