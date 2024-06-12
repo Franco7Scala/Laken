@@ -83,6 +83,7 @@ if __name__ == "__main__":
     y = []
     data = dataset.get_train_loader()
     dataiter = iter(data)
+    vae.eval()
     for batch in dataiter:
         x.append(vae.encode(batch[0].to(support.device)).cpu().squeeze().detach().numpy())
         y.append(int(batch[1].squeeze().detach().numpy()))
@@ -128,6 +129,6 @@ if __name__ == "__main__":
     training_nn_start_time = get_time_in_millis()
     model.fit(model_training_epochs, None, optimizer, dataset.get_train_loader())
     training_nn_end_time = get_time_in_millis()
-    _, accuracy = model.evaluate(None, dataset.test_loader)
+    _, accuracy, precision, recall, f1 = model.evaluate(None, dataset.test_loader)
 
-    clprint("The accuracy of the neural network is {}% reached in {} seconds!".format(accuracy, ((training_nn_end_time - training_nn_start_time) / 1000)), Reason.OUTPUT_TRAINING, loggable=True)
+    clprint("Nn's accuracy {}%, precision: {}, recall: {}, F1:{} -> reached in {} seconds!".format(accuracy, precision, recall, f1, ((training_nn_end_time - training_nn_start_time) / 1000)), Reason.OUTPUT_TRAINING, loggable=True)
