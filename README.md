@@ -17,14 +17,14 @@ This repository contains code of Laken presented in the paper "Enhancing Active 
 
 ## Requirements
 
-* Python
-* PyTorch
-* Torchvision
-* NumPy
-* SciPy
-* Scikit-learn
-* Pandas
-* IPython
-* matplotlib
-* plotly
-* tqdm
+* Python (3.10.6)
+* PyTorch (2.2.1)
+* Torchvision (0.17.1)
+* NumPy (1.26.4)
+* SciPy (1.12.0)
+* Scikit-learn (1.4.1.post1)
+* Pandas (2.2.1)
+* IPython (8.22.2)
+* matplotlib (3.8.3)
+* plotly (5.20.0)
+* tqdm (4.66.2)
