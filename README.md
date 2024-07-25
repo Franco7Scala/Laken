@@ -11,8 +11,8 @@ This repository contains code of Laken presented in the paper "Enhancing Active 
    * **Important:** Configure the VAE training parameters directly within the `vae_train.py` script, in the section designated for parameter settings.
 
 2. **Active Learning Loop:**
-   * Execute `main_active_learner.py`. This script loads the trained VAE and begins the AL process.
-   * **Important:**  Set the AL loop parameters (e.g., AL technique, number of iterations) directly within the `main_active_learner.py` script, in the parameter settings section;
+   * Execute `main_active_learner.py`. This script loads the trained VAE and begins the AL process;
+   * **Important:**  Set the AL loop parameters (e.g., AL technique, number of iterations) directly within the `main_active_learner.py` script, in the parameter settings section.
 
 
 ## Requirements
