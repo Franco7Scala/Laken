@@ -9,6 +9,7 @@ from active_learning_technique.qbc_al_technique import QueryByCommiteeALTechniqu
 from active_learning_technique.lcs_al_technique import LCSALTechnique
 from active_learning_technique.query_by_committee.decision_tree_classifier import DecisionTreeClassifier
 from active_learning_technique.query_by_committee.random_forest_classifier import RandomForestClassifier
+from src.active_learning_technique.vaal_al_technique import VAALALTechnique
 from src.al_dataset.fashion_mnist_al_dataset import FashionMNISTALDataset
 from src.neural_networks.fashion_mnist import fashion_mnist_vae
 from src.neural_networks.resnet import ResNet
@@ -31,8 +32,8 @@ if __name__ == "__main__":
     n_classes = 10
     use_laken = True
     n_neighbors_for_knn = 5
-    al_technique = "lcs"     # "rnd" "lcs" "bait" "qbc"
-    model_name = "resnet"    # "cnn" "resnet"
+    al_technique = "lcs"     # "rnd" "lcs" "bait" "qbc" "vaal"
+    model_name = "cnn"    # "cnn" "resnet"
     dataset_name = "mnist"   # "mnist" "fmnist"
 
     #############################################################################################################
@@ -90,6 +91,9 @@ if __name__ == "__main__":
 
     elif al_technique == "qbc":
         al_technique = QueryByCommiteeALTechnique([RandomForestClassifier(al_dataset), model, DecisionTreeClassifier(al_dataset)], n_classes)
+
+    elif al_technique == "vaal":
+        al_technique = VAALALTechnique(model, vae, al_dataset, n_classes)
 
     else:
         clprint("Unknown Al technique...", Reason.WARNING)
