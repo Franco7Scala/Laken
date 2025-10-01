@@ -13,7 +13,10 @@ if __name__ == "__main__":
 
     dataset_name = "mnist"  # "fmnist"
 
+
     #############################################################################################################
+
+
     clprint("Loading dataset...", Reason.INFO_TRAINING)
     if dataset_name == "mnist":
         train_dataset = datasets.MNIST(root=dataset_path.format("mnist"), train=True, transform=transforms.ToTensor(), download=True)

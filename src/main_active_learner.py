@@ -32,7 +32,7 @@ if __name__ == "__main__":
     n_classes = 10
     use_laken = True
     n_neighbors_for_knn = 5
-    al_technique = "lcs"     # "rnd" "lcs" "bait" "qbc" "vaal"
+    al_technique = "vaal"     # "rnd" "lcs" "bait" "qbc" "vaal"
     model_name = "cnn"    # "cnn" "resnet"
     dataset_name = "mnist"   # "mnist" "fmnist"
 
