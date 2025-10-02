@@ -75,6 +75,9 @@ class AbstractALDataset:
     def get_all_data_loader(self):
         return DataLoader(Dataset(self.shape_data, self.x_labeled.extend(self.unlabeled_dict.keys()), None), batch_size=support.train_batch_size)
 
+    def get_unlabeled_data_loader(self):
+        return DataLoader(Dataset(self.shape_data, list(self.unlabeled_dict.keys()), [-1] * len(list(self.unlabeled_dict.keys()))), batch_size=support.train_batch_size)
+
     def get_train_loader(self):
         return DataLoader(Dataset(self.shape_data, self.x_labeled, self.y_labeled), batch_size=support.train_batch_size)
 
