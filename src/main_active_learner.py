@@ -9,6 +9,7 @@ from active_learning_technique.qbc_al_technique import QueryByCommiteeALTechniqu
 from active_learning_technique.lcs_al_technique import LCSALTechnique
 from active_learning_technique.query_by_committee.decision_tree_classifier import DecisionTreeClassifier
 from active_learning_technique.query_by_committee.random_forest_classifier import RandomForestClassifier
+from src.active_learner.ss_active_learner import SSActiveLearner
 from src.active_learning_technique.vaal_al_technique import VAALALTechnique
 from src.al_dataset.fashion_mnist_al_dataset import FashionMNISTALDataset
 from src.neural_networks.fashion_mnist import fashion_mnist_vae
@@ -24,19 +25,22 @@ from src.al_dataset.mnist_al_dataset import MNISTALDataset
 if __name__ == "__main__":
     support.warm_up()
 
-    percentage_labeled = 0.01
+    percentage_labeled = 0.2
     al_epochs = 10
     training_epochs = 10
-    n_samples_to_select = 500
+    n_samples_to_select = 50
     n_samples_for_human = 50
     n_classes = 10
-    use_laken = True
-    n_neighbors_for_knn = 5
+    active_learner_name = "laken" # laken simple
+    n_neighbors_for_knn = 3
     al_technique = "vaal"     # "rnd" "lcs" "bait" "qbc" "vaal"
     model_name = "cnn"    # "cnn" "resnet"
-    dataset_name = "mnist"   # "mnist" "fmnist"
+    dataset_name = "fmnist"   # "mnist" "fmnist"
+
 
     #############################################################################################################
+
+
     clprint("Loading {} model...".format(model_name), Reason.INFO_TRAINING)
 
     if model_name == "cnn":
@@ -102,7 +106,7 @@ if __name__ == "__main__":
     clprint("AL technique selected is {}!".format(al_technique.__class__.__name__), Reason.INFO_TRAINING, loggable=True)
 
     clprint("Starting AL process...", Reason.INFO_TRAINING)
-    if use_laken:
+    if active_learner_name == "laken":
         active_learner = LakenActiveLearner(vae, al_dataset, al_technique, n_samples_for_human, n_neighbors_for_knn)
 
     else:
