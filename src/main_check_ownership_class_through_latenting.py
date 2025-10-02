@@ -22,7 +22,10 @@ if __name__ == "__main__":
     n_neighbors = 5
     dataset_name = "mnist"  # "fmnist"
 
+
     #############################################################################################################
+
+
     if dataset_name == "mnist":
         vae = mnist_vae.load_model(support.vae_dim_code, support.model_path, support.device)
         dataset = MNISTALDataset(percentage_labeled)

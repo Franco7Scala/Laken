@@ -15,6 +15,7 @@ class Fashion_MNIST_VAE(nn.Module):
 
     def __init__(self, dim_code, device):
         super().__init__()
+        self.dim_code = dim_code
         self.label = nn.Embedding(10, dim_code)
         self.device = device
         # encoder
