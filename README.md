@@ -33,7 +33,7 @@ This repository contains code of Laken presented in the paper "Enhancing Active 
 
 ```
 @article{FLESCA2025100584,
-  title = {Enhancing active learning through latent space exploration: A k-nearest neighbors approach},
+  title = {Enhancing Active Learning through Latent Space Exploration: A k-nearest Neighbors Approach},
   journal = {Array},
   pages = {100584},
   year = {2025},
@@ -41,6 +41,6 @@ This repository contains code of Laken presented in the paper "Enhancing Active 
   doi = {https://doi.org/10.1016/j.array.2025.100584},
   url = {https://www.sciencedirect.com/science/article/pii/S2590005625002115},
   author = {Sergio Flesca and Domenico Mandaglio and Francesco Scala},
-  keywords = {Active learning, Latent space, Annotation cost},
+  keywords = {Active learning, Latent space, Pseudo-labeling}
 }
 ```
