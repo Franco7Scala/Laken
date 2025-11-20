@@ -23,6 +23,7 @@ class VAALALTechnique(AbstractALTechnique):
     def select_samples(self, unlabeled_samples, n_samples_to_select):
         all_preds = []
         all_indices = []
+        self.vae.eval()
 
         for sample in unlabeled_samples:
             with torch.no_grad():

@@ -102,3 +102,6 @@ class AbstractALDataset:
 
     def get_test_numpy(self):
         return self.test_x, self.test_y
+
+    def n_classes(self):
+        return len(set(self.test_y))
