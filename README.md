@@ -28,3 +28,19 @@ This repository contains code of Laken presented in the paper "Enhancing Active 
 * matplotlib (3.8.3)
 * plotly (5.20.0)
 * tqdm (4.66.2)
+
+## Citation
+
+```
+@article{FLESCA2025100584,
+  title = {Enhancing active learning through latent space exploration: A k-nearest neighbors approach},
+  journal = {Array},
+  pages = {100584},
+  year = {2025},
+  issn = {2590-0056},
+  doi = {https://doi.org/10.1016/j.array.2025.100584},
+  url = {https://www.sciencedirect.com/science/article/pii/S2590005625002115},
+  author = {Sergio Flesca and Domenico Mandaglio and Francesco Scala},
+  keywords = {Active learning, Latent space, Annotation cost},
+}
+```
