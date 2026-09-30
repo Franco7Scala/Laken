@@ -1,8 +1,9 @@
 # Laken
 
-This repository contains code of Laken presented in the paper "Enhancing Active Learning through Latent Space Exploration: A K-Nearest Neighbors Approach"
-
+[![Paper](https://img.shields.io/badge/Paper-Array-brightgreen.svg)](https://doi.org/10.1016/j.array.2025.100584)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+This repository contains code of Laken presented in the paper "Enhancing Active Learning through Latent Space Exploration: A K-Nearest Neighbors Approach"
 
 ## How It Works
 
